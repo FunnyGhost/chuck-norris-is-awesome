@@ -54,7 +54,14 @@ fdescribe('JokeComponent', () => {
   });
 
   it('should show if a joke is not a favorite', () => {
-    expect(true).toBe(false);
+    const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
+    component.joke = jokeToUse;
+    component.isFavorite = false;
+    fixture.detectChanges();
+
+    const favoriteElements = de.queryAll(By.css('.favorite'));
+
+    expect(favoriteElements.length).toBe(0);
   });
 
   it('should propagate a toggle favorite event when the user favorites the joke', () => {
