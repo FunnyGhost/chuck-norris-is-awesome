@@ -20,4 +20,20 @@ describe('JokeListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show a list of jokes', () => {
+    expect(true).toBe(false);
+  });
+
+  it('should handle the toggle favorite joke for a favorited joke', () => {
+    expect(true).toBe(false);
+  });
+
+  it('should handle the toggle favorite joke for a joke that is not favorited', () => {
+    expect(true).toBe(false);
+  });
+
+  it('should show an error if the operation of getting the jokes fails', () => {
+    expect(true).toBe(false);
+  });
 });
