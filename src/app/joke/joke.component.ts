@@ -8,6 +8,7 @@ import { Joke } from '../core/joke';
 })
 export class JokeComponent implements OnInit {
   @Input() joke: Joke;
+  @Input() isFavorite: boolean;
 
   constructor() {}
 

@@ -24,6 +24,7 @@ fdescribe('JokeComponent', () => {
   it('should create', () => {
     const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
     component.joke = jokeToUse;
+    component.isFavorite = false;
     fixture.detectChanges();
 
     expect(component).toBeTruthy();
@@ -32,7 +33,7 @@ fdescribe('JokeComponent', () => {
   it('should render the given joke', () => {
     const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
     component.joke = jokeToUse;
-
+    component.isFavorite = false;
     fixture.detectChanges();
 
     const jokeElements = de.queryAll(By.css('.joke'));
@@ -42,7 +43,14 @@ fdescribe('JokeComponent', () => {
   });
 
   it('should show if a joke is already a favorite', () => {
-    expect(true).toBe(false);
+    const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
+    component.joke = jokeToUse;
+    component.isFavorite = true;
+    fixture.detectChanges();
+
+    const favoriteElements = de.queryAll(By.css('.favorite'));
+
+    expect(favoriteElements.length).toBe(1);
   });
 
   it('should show if a joke is not a favorite', () => {
