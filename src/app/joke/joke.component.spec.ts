@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Joke } from 'src/app/core/joke';
 import { JokeComponent } from './joke.component';
 
-fdescribe('JokeComponent', () => {
+describe('JokeComponent', () => {
   let component: JokeComponent;
   let fixture: ComponentFixture<JokeComponent>;
   let de: DebugElement;
@@ -64,11 +64,35 @@ fdescribe('JokeComponent', () => {
     expect(favoriteElements.length).toBe(0);
   });
 
-  it('should propagate a toggle favorite event when the user favorites the joke', () => {
-    expect(true).toBe(false);
+  it('should propagate a toggle favorite event when the user favorites the joke', done => {
+    const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
+    component.joke = jokeToUse;
+    component.isFavorite = false;
+    fixture.detectChanges();
+
+    component.toggleFavorite.subscribe((jokeId: number) => {
+      expect(jokeId).toBe(jokeToUse.id);
+      done();
+    });
+
+    const favoriteButton = de.query(By.css('button'));
+
+    favoriteButton.triggerEventHandler('click', null);
   });
 
-  it('should propagate a toggle favorite event when the user unfavorites the joke', () => {
-    expect(true).toBe(false);
+  it('should propagate a toggle favorite event when the user unfavorites the joke', done => {
+    const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
+    component.joke = jokeToUse;
+    component.isFavorite = true;
+    fixture.detectChanges();
+
+    component.toggleFavorite.subscribe((jokeId: number) => {
+      expect(jokeId).toBe(jokeToUse.id);
+      done();
+    });
+
+    const favoriteButton = de.query(By.css('button'));
+
+    favoriteButton.triggerEventHandler('click', null);
   });
 });

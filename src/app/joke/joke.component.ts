@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Joke } from '../core/joke';
 
 @Component({
@@ -10,7 +10,13 @@ export class JokeComponent implements OnInit {
   @Input() joke: Joke;
   @Input() isFavorite: boolean;
 
+  @Output() toggleFavorite = new EventEmitter<number>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  onToggleFavorite(): void {
+    this.toggleFavorite.emit(this.joke.id);
+  }
 }
