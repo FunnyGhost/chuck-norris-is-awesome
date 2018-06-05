@@ -1,9 +1,13 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { Joke } from 'src/app/core/joke';
 import { JokeComponent } from './joke.component';
 
-describe('JokeComponent', () => {
+fdescribe('JokeComponent', () => {
   let component: JokeComponent;
   let fixture: ComponentFixture<JokeComponent>;
+  let de: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -14,15 +18,27 @@ describe('JokeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(JokeComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    de = fixture.debugElement;
   });
 
   it('should create', () => {
+    const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
+    component.joke = jokeToUse;
+    fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
 
   it('should render the given joke', () => {
-    expect(true).toBe(false);
+    const jokeToUse: Joke = { id: 1, joke: 'The batmobile is super slow' };
+    component.joke = jokeToUse;
+
+    fixture.detectChanges();
+
+    const jokeElements = de.queryAll(By.css('.joke'));
+
+    expect(jokeElements.length).toBe(1);
+    expect(jokeElements[0].nativeElement.innerHTML).toContain(jokeToUse.joke);
   });
 
   it('should show if a joke is already a favorite', () => {
