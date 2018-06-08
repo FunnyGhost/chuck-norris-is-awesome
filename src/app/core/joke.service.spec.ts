@@ -5,6 +5,7 @@ import { Joke } from 'src/app/core/joke';
 import { environment } from '../../environments/environment';
 import { JokeResponse } from './joke-response';
 import { JokeService } from './joke.service';
+import { LocalStorageService } from './local-storage.service';
 
 describe('JokeService', () => {
   let httpClient: HttpClient;
@@ -14,7 +15,7 @@ describe('JokeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [JokeService]
+      providers: [JokeService, LocalStorageService]
     });
 
     httpClient = TestBed.get(HttpClient);

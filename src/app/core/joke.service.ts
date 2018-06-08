@@ -6,12 +6,13 @@ import { Joke } from 'src/app/core/joke';
 import { environment } from '../../environments/environment';
 import { CoreModule } from './core.module';
 import { JokeResponse } from './joke-response';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: CoreModule
 })
 export class JokeService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
 
   getRandomJokes(howMany: number): Observable<Joke[]> {
     const urlToCall = `${environment.jokeApiUrl}/${howMany}`;
@@ -22,4 +23,6 @@ export class JokeService {
       })
     );
   }
+
+  toggleJokeFavorite(joke: Joke): void {}
 }
