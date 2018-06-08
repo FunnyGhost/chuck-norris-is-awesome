@@ -12,6 +12,8 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: CoreModule
 })
 export class JokeService {
+  favorites: Joke[] = this.localStorageService.getFavorites();
+
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
 
   getRandomJokes(howMany: number): Observable<Joke[]> {
@@ -24,5 +26,19 @@ export class JokeService {
     );
   }
 
-  toggleJokeFavorite(joke: Joke): void {}
+  toggleJokeFavorite(joke: Joke): void {
+    if (this.isJokeFavorite(joke)) {
+      this.favorites = this.favorites.filter((favorite: Joke) => {
+        return favorite.id !== joke.id;
+      });
+    } else {
+      this.favorites = [...this.favorites, joke];
+    }
+
+    this.localStorageService.setFavorites(this.favorites);
+  }
+
+  isJokeFavorite(joke: Joke): boolean {
+    return this.favorites.includes(joke);
+  }
 }
