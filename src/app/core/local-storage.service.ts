@@ -17,6 +17,6 @@ export class LocalStorageService {
   getFavorites(): Joke[] {
     const favorites = localStorage.getItem(this.FAVORITES_KEY);
 
-    return JSON.parse(favorites) as Joke[];
+    return (JSON.parse(favorites) as Joke[]) || [];
   }
 }

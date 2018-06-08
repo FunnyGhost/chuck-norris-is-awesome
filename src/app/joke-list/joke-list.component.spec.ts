@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Joke } from 'src/app/core/joke';
 import { JokeService } from '../core/joke.service';
+import { LocalStorageService } from '../core/local-storage.service';
 import { JokeListComponent } from './joke-list.component';
 import { JokeComponent } from './joke/joke.component';
 
@@ -27,7 +28,7 @@ describe('JokeListComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [JokeListComponent, JokeComponent],
-      providers: [JokeService]
+      providers: [JokeService, LocalStorageService]
     }).compileComponents();
   }));
 
