@@ -19,4 +19,8 @@ export class JokeListComponent implements OnInit {
   onToggleJokeFavorite(joke: Joke): void {
     this.jokeService.toggleJokeFavorite(joke);
   }
+
+  isJokeFavorite(joke: Joke): boolean {
+    return this.jokeService.isJokeFavorite(joke);
+  }
 }

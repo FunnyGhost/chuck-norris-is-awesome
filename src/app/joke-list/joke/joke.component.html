@@ -1,4 +1,5 @@
 <div class="joke">
   {{joke.joke}}
   <button [class.favorite]='isFavorite' (click)='onToggleFavorite()'>Heart here</button>
+  <span>{{isFavorite}}</span>
 </div>
