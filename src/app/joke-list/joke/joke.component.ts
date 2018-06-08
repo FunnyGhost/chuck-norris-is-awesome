@@ -10,13 +10,13 @@ export class JokeComponent implements OnInit {
   @Input() joke: Joke;
   @Input() isFavorite: boolean;
 
-  @Output() toggleFavorite = new EventEmitter<number>();
+  @Output() toggleFavorite = new EventEmitter<Joke>();
 
   constructor() {}
 
   ngOnInit() {}
 
   onToggleFavorite(): void {
-    this.toggleFavorite.emit(this.joke.id);
+    this.toggleFavorite.emit(this.joke);
   }
 }

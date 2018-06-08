@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Joke } from 'src/app/core/joke';
 import { JokeComponent } from './joke.component';
@@ -70,8 +70,8 @@ describe('JokeComponent', () => {
     component.isFavorite = false;
     fixture.detectChanges();
 
-    component.toggleFavorite.subscribe((jokeId: number) => {
-      expect(jokeId).toBe(jokeToUse.id);
+    component.toggleFavorite.subscribe((joke: Joke) => {
+      expect(joke).toBe(jokeToUse);
       done();
     });
 
@@ -86,8 +86,8 @@ describe('JokeComponent', () => {
     component.isFavorite = true;
     fixture.detectChanges();
 
-    component.toggleFavorite.subscribe((jokeId: number) => {
-      expect(jokeId).toBe(jokeToUse.id);
+    component.toggleFavorite.subscribe((joke: Joke) => {
+      expect(joke).toBe(jokeToUse);
       done();
     });
 

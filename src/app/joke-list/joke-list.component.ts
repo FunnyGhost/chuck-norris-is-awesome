@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Joke } from '../core/joke';
+import { JokeService } from '../core/joke.service';
 
 @Component({
   selector: 'app-joke-list',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./joke-list.component.scss']
 })
 export class JokeListComponent implements OnInit {
-
-  constructor() { }
+  jokes$: Observable<Joke[]>;
+  constructor(private jokeService: JokeService) {}
 
   ngOnInit() {
+    this.jokes$ = this.jokeService.getRandomJokes(10);
   }
 
+  onToggleJokeFavorite(joke: Joke): void {
+    this.jokeService.toggleJokeFavorite(joke);
+  }
 }

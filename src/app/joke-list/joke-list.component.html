@@ -1,3 +1,3 @@
-<p>
-  joke-list works!
-</p>
+<h3>Jokes</h3>
+
+<app-joke *ngFor='let joke of (jokes$ | async)' [joke]='joke'></app-joke>
