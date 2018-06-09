@@ -52,8 +52,8 @@ export class JokeService {
   }
 
   addRandomFavorites(): void {
-    if (!this.randomFavoritesSubscription) {
-      this.randomFavoritesSubscription = interval(5000)
+    if (!this.randomFavoritesSubscription || this.randomFavoritesSubscription.closed) {
+      this.randomFavoritesSubscription = interval(1000)
         .pipe(
           switchMap(() => this.getRandomJokes(1)),
           map((jokes: Joke[]) => {
@@ -67,7 +67,7 @@ export class JokeService {
   }
 
   cancelRandomFavorites(): void {
-    if (this.randomFavoritesSubscription) {
+    if (this.randomFavoritesSubscription && !this.randomFavoritesSubscription.closed) {
       this.randomFavoritesSubscription.unsubscribe();
     }
   }
