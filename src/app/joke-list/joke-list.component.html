@@ -2,4 +2,4 @@
 <app-joke *ngFor='let joke of (jokes$ | async)' [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
 
 <h3>Favorites</h3>
-<app-joke *ngFor='let joke of favorites' [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
+<app-joke *ngFor='let joke of (favorites$ | async)' [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>

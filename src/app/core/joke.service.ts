@@ -12,9 +12,13 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: CoreModule
 })
 export class JokeService {
-  favorites: Joke[] = this.localStorageService.getFavorites();
+  private favorites: Joke[];
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+    this.localStorageService.favorites$.subscribe((favorites: Joke[]) => {
+      this.favorites = favorites;
+    });
+  }
 
   getRandomJokes(howMany: number): Observable<Joke[]> {
     const urlToCall = `${environment.jokeApiUrl}/${howMany}`;
@@ -24,6 +28,10 @@ export class JokeService {
         return response.value;
       })
     );
+  }
+
+  getFavorites(): Observable<Joke[]> {
+    return this.localStorageService.favorites$;
   }
 
   toggleJokeFavorite(joke: Joke): void {

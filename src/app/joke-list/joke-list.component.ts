@@ -10,12 +10,13 @@ import { JokeService } from '../core/joke.service';
 })
 export class JokeListComponent implements OnInit {
   jokes$: Observable<Joke[]>;
-  favorites: Joke[] = this.jokeService.favorites;
+  favorites$: Observable<Joke[]>;
 
   constructor(private jokeService: JokeService) {}
 
   ngOnInit() {
     this.jokes$ = this.jokeService.getRandomJokes(10);
+    this.favorites$ = this.jokeService.getFavorites();
   }
 
   onToggleJokeFavorite(joke: Joke): void {

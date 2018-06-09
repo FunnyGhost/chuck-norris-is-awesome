@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CoreModule } from './core.module';
 import { Joke } from './joke';
 
@@ -7,16 +8,21 @@ import { Joke } from './joke';
 })
 export class LocalStorageService {
   readonly FAVORITES_KEY = 'favorites';
+  public favorites$: BehaviorSubject<Joke[]> = new BehaviorSubject<Joke[]>([]);
 
-  constructor() {}
+  constructor() {
+    this.getFavorites();
+  }
 
   setFavorites(favorites: Joke[]): void {
     localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(favorites));
+    this.favorites$.next(favorites);
   }
 
-  getFavorites(): Joke[] {
-    const favorites = localStorage.getItem(this.FAVORITES_KEY);
+  private getFavorites(): void {
+    const favoritesFromLocalStorage = localStorage.getItem(this.FAVORITES_KEY);
+    const favoriteJokes: Joke[] = (JSON.parse(favoritesFromLocalStorage) as Joke[]) || [];
 
-    return (JSON.parse(favorites) as Joke[]) || [];
+    this.favorites$.next(favoriteJokes);
   }
 }
