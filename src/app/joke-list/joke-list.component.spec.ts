@@ -1,6 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { of } from 'rxjs';
 import { Joke } from 'src/app/core/joke';
 import { JokeService } from '../core/joke.service';
@@ -26,7 +28,7 @@ describe('JokeListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, TabsModule.forRoot(), FormsModule],
       declarations: [JokeListComponent, JokeComponent],
       providers: [JokeService, LocalStorageService]
     }).compileComponents();

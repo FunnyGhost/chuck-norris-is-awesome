@@ -75,7 +75,7 @@ describe('JokeComponent', () => {
       done();
     });
 
-    const favoriteButton = de.query(By.css('button'));
+    const favoriteButton = de.query(By.css('i'));
 
     favoriteButton.triggerEventHandler('click', null);
   });
@@ -91,7 +91,7 @@ describe('JokeComponent', () => {
       done();
     });
 
-    const favoriteButton = de.query(By.css('button'));
+    const favoriteButton = de.query(By.css('i'));
 
     favoriteButton.triggerEventHandler('click', null);
   });
