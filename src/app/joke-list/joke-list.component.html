@@ -1,6 +1,35 @@
-<h3>Jokes</h3>
-<input type="checkbox" name="random-favorites" id="random-favorites" [(ngModel)]='getRandomJokes'>
-<app-joke *ngFor='let joke of (jokes$ | async)' [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
+<div class="container">
+  <h1 class="text-center">Chuck Norris is awesome!</h1>
+  <div class="mt-4">
+    <tabset type="pills">
+      <tab heading="Jokes">
+        <div class="mt-4">
+          <ul class="list-group">
+            <li class="list-group-item  list-group-flush" *ngFor='let joke of (jokes$ | async)'>
+              <app-joke class="row" [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
+            </li>
+          </ul>
+        </div>
 
-<h3>Favorites</h3>
-<app-joke *ngFor='let joke of (favorites$ | async)' [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
+      </tab>
+      <tab heading="Favorites">
+        <div class="mt-4">
+          <div class="row">
+            <div class="col-12 text-right">
+              <input type="checkbox" class="form-check-input" name="random-favorites" id="random-favorites" [(ngModel)]='getRandomJokes'>
+              <label class="form-check-label" for="random-favorites">Get random favorites</label>
+            </div>
+
+          </div>
+
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor='let joke of (favorites$ | async)'>
+              <app-joke class="row" [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
+            </li>
+          </ul>
+        </div>
+
+      </tab>
+    </tabset>
+  </div>
+</div>

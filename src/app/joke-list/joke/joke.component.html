@@ -1,5 +1,14 @@
-<div class="joke">
-  {{joke.joke}}
-  <button [class.favorite]='isFavorite' (click)='onToggleFavorite()'>Heart here</button>
-  <span>{{isFavorite}}</span>
+<div class="container">
+  <div class="row">
+    <div class="col-1" *ngIf='!isFavorite'>
+      <i class="heart far fa-heart" (click)='onToggleFavorite()'></i>
+    </div>
+    <div class="col-1" *ngIf='isFavorite'>
+      <i class="heart fas fa-heart" (click)='onToggleFavorite()'></i>
+    </div>
+    <div class="col-11">
+      <p>{{joke.joke}}</p>
+    </div>
+
+  </div>
 </div>
