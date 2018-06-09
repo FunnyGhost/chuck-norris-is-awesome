@@ -15,6 +15,9 @@ export class LocalStorageService {
   }
 
   setFavorites(favorites: Joke[]): void {
+    if (favorites.length > 10) {
+      favorites = favorites.splice(favorites.length - 10, 10);
+    }
     localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(favorites));
     this.favorites$.next(favorites);
   }
