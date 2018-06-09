@@ -1,4 +1,5 @@
 <h3>Jokes</h3>
+<input type="checkbox" name="random-favorites" id="random-favorites" [(ngModel)]='getRandomJokes'>
 <app-joke *ngFor='let joke of (jokes$ | async)' [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
 
 <h3>Favorites</h3>

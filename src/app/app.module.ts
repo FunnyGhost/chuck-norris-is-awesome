@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { JokeComponent } from 'src/app/joke-list/joke/joke.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +9,7 @@ import { JokeListComponent } from './joke-list/joke-list.component';
 
 @NgModule({
   declarations: [AppComponent, JokeComponent, JokeListComponent],
-  imports: [BrowserModule, CoreModule, AppRoutingModule],
+  imports: [BrowserModule, CoreModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

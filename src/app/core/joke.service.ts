@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { interval, Observable, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Joke } from 'src/app/core/joke';
 import { environment } from '../../environments/environment';
 import { CoreModule } from './core.module';
@@ -13,6 +13,7 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class JokeService {
   private favorites: Joke[];
+  private randomFavoritesSubscription: Subscription;
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
     this.localStorageService.favorites$.subscribe((favorites: Joke[]) => {
@@ -48,5 +49,26 @@ export class JokeService {
 
   isJokeFavorite(joke: Joke): boolean {
     return this.favorites.includes(joke);
+  }
+
+  addRandomFavorites(): void {
+    if (!this.randomFavoritesSubscription) {
+      this.randomFavoritesSubscription = interval(5000)
+        .pipe(
+          switchMap(() => this.getRandomJokes(1)),
+          map((jokes: Joke[]) => {
+            return jokes[0];
+          })
+        )
+        .subscribe((joke: Joke) => {
+          console.log('New favorite joke', joke);
+        });
+    }
+  }
+
+  cancelRandomFavorites(): void {
+    if (this.randomFavoritesSubscription) {
+      this.randomFavoritesSubscription.unsubscribe();
+    }
   }
 }
