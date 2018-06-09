@@ -21,7 +21,7 @@ export class JokeListComponent implements OnInit {
       this.jokeService.cancelRandomFavorites();
     }
   }
-  get getRandomFavorites(): boolean {
+  get getRandomJokes(): boolean {
     return this._getRandomJokes;
   }
 
@@ -38,9 +38,5 @@ export class JokeListComponent implements OnInit {
 
   isJokeFavorite(joke: Joke): boolean {
     return this.jokeService.isJokeFavorite(joke);
-  }
-
-  checkChanged(event: any): void {
-    console.log('check changed', event.value);
   }
 }
