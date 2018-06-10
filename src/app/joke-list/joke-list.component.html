@@ -9,7 +9,7 @@
               <button class='btn btn-primary' (click)='refreshJokes()'>Refresh</button>
             </div>
           </div>
-          <ul class="list-group">
+          <ul class="list-group mt-1">
             <li class="list-group-item  list-group-flush" *ngFor='let joke of (jokes$ | async)'>
               <app-joke class="row" [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
             </li>
@@ -25,7 +25,7 @@
               <label class="form-check-label" for="random-favorites">Get random favorites</label>
             </div>
           </div>
-          <ul class="list-group">
+          <ul class="list-group mt-1">
             <li class="list-group-item" *ngFor='let joke of (favorites$ | async)'>
               <app-joke class="row" [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
             </li>
