@@ -4,6 +4,11 @@
     <tabset type="pills">
       <tab heading="Jokes">
         <div class="mt-4">
+          <div class="row">
+            <div class="col-12 text-right">
+              <button class='btn btn-primary' (click)='refreshJokes()'>Refresh</button>
+            </div>
+          </div>
           <ul class="list-group">
             <li class="list-group-item  list-group-flush" *ngFor='let joke of (jokes$ | async)'>
               <app-joke class="row" [joke]='joke' [isFavorite]='isJokeFavorite(joke)' (toggleFavorite)='onToggleJokeFavorite($event)'></app-joke>
@@ -16,7 +21,7 @@
         <div class="mt-4">
           <div class="row">
             <div class="col-12 text-right">
-              <input type="checkbox" class="form-check-input" name="random-favorites" id="random-favorites" [(ngModel)]='getRandomJokes'>
+              <input type="checkbox" class="form-check-input" name="random-favorites" id="random-favorites" [(ngModel)]='getRandomFavorites'>
               <label class="form-check-label" for="random-favorites">Get random favorites</label>
             </div>
           </div>

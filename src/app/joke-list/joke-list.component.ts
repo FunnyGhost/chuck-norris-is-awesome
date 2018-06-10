@@ -12,24 +12,28 @@ export class JokeListComponent implements OnInit {
   jokes$: Observable<Joke[]>;
   favorites$: Observable<Joke[]>;
 
-  private _getRandomJokes = false;
-  set getRandomJokes(value) {
-    this._getRandomJokes = value;
+  private _getRandomFavorites = false;
+  set getRandomFavorites(value) {
+    this._getRandomFavorites = value;
     if (value) {
       this.jokeService.addRandomFavorites();
     } else {
       this.jokeService.cancelRandomFavorites();
     }
   }
-  get getRandomJokes(): boolean {
-    return this._getRandomJokes;
+  get getRandomFavorites(): boolean {
+    return this._getRandomFavorites;
   }
 
   constructor(private jokeService: JokeService) {}
 
   ngOnInit() {
-    this.jokes$ = this.jokeService.getRandomJokes(10);
+    this.refreshJokes();
     this.favorites$ = this.jokeService.getFavorites();
+  }
+
+  refreshJokes() {
+    this.jokes$ = this.jokeService.getRandomJokes(10);
   }
 
   onToggleJokeFavorite(joke: Joke): void {
